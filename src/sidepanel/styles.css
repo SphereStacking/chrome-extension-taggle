@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+    --sp-bg: #ffffff;
+    --sp-text: #0f172a;
+    --sp-muted: #64748b;
+    --sp-border: #e2e8f0;
+    --sp-surface: #f8fafc;
+    --sp-surface-2: #f1f5f9;
+    --sp-btn: #0f172a;
+    --sp-btn-text: #ffffff;
+  }
+
+  .dark {
+    --sp-bg: #1b1b1b;
+    --sp-text: #e7e7e7;
+    --sp-muted: #b0b0b0;
+    --sp-border: #333333;
+    --sp-surface: #2a2a2a;
+    --sp-surface-2: #242424;
+    --sp-btn: #ededed;
+    --sp-btn-text: #1b1b1b;
+  }
+}
+
+@layer utilities {
+  .sp-bg {
+    background-color: var(--sp-bg);
+  }
+
+  .sp-text {
+    color: var(--sp-text);
+  }
+
+  .sp-muted {
+    color: var(--sp-muted);
+  }
+
+  .sp-border {
+    border-color: var(--sp-border);
+  }
+
+  .sp-surface {
+    background-color: var(--sp-surface);
+  }
+
+  .sp-surface-2 {
+    background-color: var(--sp-surface-2);
+  }
+
+  .sp-btn {
+    background-color: var(--sp-btn);
+  }
+
+  .sp-btn-text {
+    color: var(--sp-btn-text);
+  }
+
+  .sp-fade-in {
+    animation: sp-fade-in 240ms ease-out both;
+  }
+
+  .sp-slide-up {
+    animation: sp-slide-up 260ms cubic-bezier(0.2, 0.6, 0.2, 1) both;
+  }
+
+  .sp-stagger {
+    animation: sp-stagger 300ms ease-out both;
+    animation-delay: calc(var(--sp-index, 0) * 40ms);
+  }
+}
+
+@keyframes sp-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sp-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sp-stagger {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
