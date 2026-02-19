@@ -27,6 +27,25 @@
   }
 }
 
+@layer components {
+  .sp-tag-row {
+    transition: box-shadow 150ms ease, opacity 150ms ease, transform 150ms ease;
+  }
+
+  .sp-dragging {
+    opacity: 0.25;
+    transform: scale(0.97);
+  }
+
+  .sp-drop-before {
+    box-shadow: 0 -2px 0 0 var(--sp-btn);
+  }
+
+  .sp-drop-after {
+    box-shadow: 0 2px 0 0 var(--sp-btn);
+  }
+}
+
 @layer utilities {
   .sp-bg {
     background-color: var(--sp-bg);

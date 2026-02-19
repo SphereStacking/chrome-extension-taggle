@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, ref } from 'vue'
-import { createTag, deleteTag, loadTags, updateTag } from '../services/storage'
+import { createTag, deleteTag, loadTags, saveTags, updateTag } from '../services/storage'
 import type { TagItem } from '../types'
 import { STORAGE_KEY } from '../constants'
 
@@ -40,5 +40,12 @@ export function useTags() {
     chrome.storage.onChanged.removeListener(handleChange)
   })
 
-  return { tags, refreshTags, create, update, remove }
+  async function reorder(orderedIds: string[]) {
+    const map = new Map(tags.value.map((t) => [t.id, t]))
+    const reordered = orderedIds.map((id) => map.get(id)).filter((t): t is TagItem => !!t)
+    tags.value = reordered
+    await saveTags(reordered)
+  }
+
+  return { tags, refreshTags, create, update, remove, reorder }
 }
