@@ -1,0 +1,28 @@
+{
+  "name": "chrome-extension-taggle",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "preview": "wxt preview",
+    "generate-icons": "node scripts/generate-icons.mjs"
+  },
+  "dependencies": {
+    "@iconify/vue": "^5.0.0",
+    "vue": "^3.5.13"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "esbuild"]
+  },
+  "devDependencies": {
+    "@wxt-dev/module-vue": "^1.0.3",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^3.4.17",
+    "vite": "^5.4.14",
+    "wxt": "^0.19.10"
+  }
+}
