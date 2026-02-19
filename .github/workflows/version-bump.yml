@@ -1,0 +1,47 @@
+name: Version Bump & Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version
+        id: version
+        run: |
+          npm version ${{ inputs.bump }} --no-git-tag-version
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Commit & push
+        run: |
+          git add package.json
+          git commit -m "chore: bump version to v${{ steps.version.outputs.version }}"
+          git tag ${{ steps.version.outputs.tag }}
+          git push origin main --tags
+
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create ${{ steps.version.outputs.tag }} --generate-notes --title "${{ steps.version.outputs.tag }}"
