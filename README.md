@@ -1,6 +1,10 @@
-# gcal-taggle
+<p align="center">
+  <img src="public/icon.svg" width="128" height="128" alt="Taggle for Google Calendar" />
+</p>
 
-Google Calendarのカレンダーにタグを付けて、タグ単位で表示/非表示を切り替えるChrome拡張です。
+<h1 align="center">Taggle for Google Calendar</h1>
+
+<p align="center">Google Calendarのカレンダーにタグを付けて、タグ単位で表示/非表示を切り替えるChrome拡張です。</p>
 
 ## 主な機能
 
