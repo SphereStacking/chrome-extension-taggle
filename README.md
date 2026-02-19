@@ -6,6 +6,10 @@
 
 <p align="center">Google Calendarのカレンダーにタグを付けて、タグ単位で表示/非表示を切り替えるChrome拡張です。</p>
 
+<p align="center">
+  <img src="docs/screenshot.png" width="640" alt="Screenshot" />
+</p>
+
 ## 主な機能
 
 - カレンダー一覧の取得
