@@ -16,7 +16,7 @@ permissions:
   contents: write
 
 jobs:
-  bump:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +26,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
       - name: Bump version
         id: version
         run: |
@@ -33,15 +40,23 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          sed -i "s/version: '.*'/version: '$VERSION'/" wxt.config.ts
 
       - name: Commit & push
         run: |
-          git add package.json
+          git add package.json wxt.config.ts
           git commit -m "chore: bump version to v${{ steps.version.outputs.version }}"
           git tag ${{ steps.version.outputs.tag }}
           git push origin main --tags
 
-      - name: Create Release
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - name: Zip extension
+        run: cd .output/chrome-mv3 && zip -r ../../chrome-extension-taggle-${{ steps.version.outputs.tag }}.zip .
+
+      - name: Create Release with asset
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create ${{ steps.version.outputs.tag }} --generate-notes --title "${{ steps.version.outputs.tag }}"
+        run: gh release create ${{ steps.version.outputs.tag }} chrome-extension-taggle-${{ steps.version.outputs.tag }}.zip --generate-notes --title "${{ steps.version.outputs.tag }}"
