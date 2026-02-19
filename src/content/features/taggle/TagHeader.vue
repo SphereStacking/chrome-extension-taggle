@@ -27,14 +27,9 @@ const svgStyle = { height: '16px', width: '16px' }
 <template>
   <div :style="headerStyle">
     <div :style="titleGroupStyle">
-      <span :style="{ color: iconColor }" aria-hidden="true">
+      <span :style="{ color: iconColor, cursor: 'grab' }" aria-hidden="true">
         <svg viewBox="0 0 24 24" :style="svgStyle" fill="currentColor">
-          <circle cx="8" cy="6" r="1.5" />
-          <circle cx="8" cy="12" r="1.5" />
-          <circle cx="8" cy="18" r="1.5" />
-          <circle cx="16" cy="6" r="1.5" />
-          <circle cx="16" cy="12" r="1.5" />
-          <circle cx="16" cy="18" r="1.5" />
+          <path d="M7 19v-2h2v2H7m4 0v-2h2v2h-2m4 0v-2h2v2h-2M7 15v-2h2v2H7m4 0v-2h2v2h-2m4 0v-2h2v2h-2M7 11V9h2v2H7m4 0V9h2v2h-2m4 0V9h2v2h-2M7 7V5h2v2H7m4 0V5h2v2h-2m4 0V5h2v2h-2z" />
         </svg>
       </span>
       <span :style="titleStyle">TAGGLE</span>

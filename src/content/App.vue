@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import TaggleCard from './features/taggle/TaggleCard.vue'
 import TagHeader from './features/taggle/TagHeader.vue'
 import TagList from './features/taggle/TagList.vue'
@@ -12,8 +11,6 @@ import type { TagItem } from '../shared/types'
 const { tags } = useTags()
 const { isDark } = useTheme()
 const { activeMap: activeTagMap, setActive } = useActiveTagMap()
-
-const sortedTags = computed(() => [...tags.value].sort((a, b) => a.name.localeCompare(b.name, 'ja')))
 
 function openSidePanel() {
   chrome.runtime.sendMessage({ type: 'TOGGLE_SIDEPANEL' })
@@ -31,6 +28,6 @@ function toggleTag(tag: TagItem) {
 <template>
   <TaggleCard :is-dark="isDark">
     <TagHeader :count="tags.length" :is-dark="isDark" @manage="openSidePanel" />
-    <TagList :tags="sortedTags" :active-map="activeTagMap" :is-dark="isDark" @toggle="toggleTag" />
+    <TagList :tags="tags" :active-map="activeTagMap" :is-dark="isDark" @toggle="toggleTag" />
   </TaggleCard>
 </template>
