@@ -42,7 +42,7 @@ const svgStyle = { height: '16px', width: '16px' }
         :style="buttonStyle"
         type="button"
         aria-label="Open Taggle settings"
-        @click="emit('manage')"
+        @mousedown.prevent="emit('manage')"
       >
         <svg viewBox="0 0 24 24" :style="svgStyle" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="3.5" />
