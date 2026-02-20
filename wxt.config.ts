@@ -14,7 +14,7 @@ export default defineConfig({
       '48': 'icon-48.png',
       '128': 'icon-128.png'
     },
-    permissions: ['storage', 'activeTab', 'scripting', 'sidePanel'],
+    permissions: ['storage', 'activeTab', 'sidePanel'],
     host_permissions: ['https://calendar.google.com/*'],
     action: {
       default_title: 'Taggle for Google Calendar',
